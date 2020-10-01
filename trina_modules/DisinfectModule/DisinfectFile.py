@@ -8,6 +8,8 @@ from threading import Thread
 import sys
 import signal
 
+from klampt.io import resource
+
 
 class Disinfect:
     def __init__(self,Jarvis = None, debugging = False, mode = 'Kinematic'):
@@ -17,6 +19,8 @@ class Disinfect:
         self.robot = Jarvis
         self.infoLoop_rate = 0.05
         self.dt = 0.025
+        self.spawned_obj = False
+        self.wipe_obj = None
         signal.signal(signal.SIGINT, self.sigint_handler) # catch SIGINT (ctrl+c)
 
         stateRecieverThread = threading.Thread(target=self._serveStateReciever)
@@ -47,7 +51,7 @@ class Disinfect:
 
             if(status == 'active'):
                 if(self.status == 'idle'):
-                    print('\n\n\n\n starting up Disinfection Module! \n\n\n\n\n')
+                    print('\n\n\n starting up Disinfection Module! \n\n\n')
                     self.status = 'active'
                     self.state = 'active'
 
@@ -68,8 +72,7 @@ class Disinfect:
             if self.state == 'idle':
                 pass
             elif self.state == 'active':
-                print "Setting base velocity"
-                self.robot.setBaseVelocity((1.0, 0.0))
+                self.robot.setBaseVelocity((0.0, 0.0))
                 time.sleep(self.dt)
 
 if __name__ == "__main__" :

@@ -549,7 +549,7 @@ class TrinaQueue(object):
 		self.key = key
 	def push(self,item):
 		self.r.rpush(self.key,item)
-	
+
 class TrinaQueueReader(object):
 	def __init__(self, host = 'localhost', port = 6379):
 		self.r = redis.Redis(host = host, port = port)

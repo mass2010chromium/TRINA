@@ -35,4 +35,8 @@
     <terrain name="obs7" file="cube.off" translation="0 -5 0">
         <display color="0.8 0.8 0.8"/>
     </terrain>
+
+    <rigidObject name="block" file="smallerplane.off"  position="0.5 -0.5 0.5" rotateZ="0">
+        <display color="1.0 0 0"/>
+    </rigidObject>
 </world>
